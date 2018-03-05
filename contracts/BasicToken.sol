@@ -9,10 +9,9 @@ contract BasicToken {
     string public symbol;
     uint8 public decimals = 18;
 
-    // private variables
+    // internal variables
     uint256 _totalSupply;
     mapping(address => uint256) _balances;
-    mapping (address => mapping (address => uint256)) _allowance;
 
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -30,7 +29,7 @@ contract BasicToken {
         return _transfer(msg.sender, to, value);
     }
 
-    // private functions
+    // internal functions
     function _transfer(address from, address to, uint256 value) internal returns (bool) {
       require(to != address(0));
       require(value <= _balances[from]);
