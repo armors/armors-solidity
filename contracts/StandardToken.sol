@@ -2,7 +2,7 @@ pragma solidity ^0.4.18;
 import "./BasicToken.sol";
 import "./libs/Math.sol";
 
-contract StandardToken is BasicToken{
+contract StandardToken is BasicToken {
     using Math for uint256;
 
     // public variables
