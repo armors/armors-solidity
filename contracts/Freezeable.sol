@@ -1,6 +1,8 @@
 pragma solidity ^0.4.18;
 
-contract Freezeable {
+import "./Ownable.sol";
+
+contract Freezeable is Ownable{
     // public variables
 
     // internal variables
@@ -12,7 +14,7 @@ contract Freezeable {
 
 
     // public functions
-    function freeze(address addr) public returns (bool) {
+    function freeze(address addr) onlyOwner whenNotFreezed public returns (bool) {
       require(true != _freezeList[addr]);
 
       _freezeList[addr] = true;
@@ -21,7 +23,7 @@ contract Freezeable {
       return true;
     }
 
-    function unfreeze(address addr) public returns (bool) {
+    function unfreeze(address addr) onlyOwner whenFreezed public returns (bool) {
       require(true == _freezeList[addr]);
 
       _freezeList[addr] = false;
@@ -32,6 +34,11 @@ contract Freezeable {
 
     modifier whenNotFreezed() {
         require(true != _freezeList[msg.sender]);
+        _;
+    }
+
+    modifier whenFreezed() {
+        require(true == _freezeList[msg.sender]);
         _;
     }
 
