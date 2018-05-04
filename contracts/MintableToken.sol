@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.22;
 
 import "./StandardToken.sol";
 import "./Ownable.sol";
@@ -16,8 +16,8 @@ contract MintableToken is StandardToken, Ownable {
       _totalSupply = _totalSupply.add(value);
       _balances[addr] = _balances[addr].add(value);
 
-      Mint(addr, value);
-      Transfer(address(0), addr, value);
+      emit Mint(addr, value);
+      emit Transfer(address(0), addr, value);
 
       return true;
     }

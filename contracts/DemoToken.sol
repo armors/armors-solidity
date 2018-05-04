@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.22;
 
 import "./StandardToken.sol";
 
@@ -13,12 +13,12 @@ contract DemoToken is StandardToken {
     // events
 
     // public functions
-    function DemoToken() public {
+    constructor() public {
       //init _totalSupply
       uint256 _totalSupply = 10000 * (10 ** uint256(decimals));
 
       _balances[msg.sender] = _totalSupply;
-      Transfer(0x0, msg.sender, _totalSupply);
+      emit Transfer(0x0, msg.sender, _totalSupply);
     }
 
 

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.22;
 
 import "./Ownable.sol";
 
@@ -12,14 +12,13 @@ contract Freezeable is Ownable{
     event Freezed(address indexed freezedAddr);
     event UnFreezed(address indexed unfreezedAddr);
 
-
     // public functions
     function freeze(address addr) onlyOwner whenNotFreezed public returns (bool) {
       require(true != _freezeList[addr]);
 
       _freezeList[addr] = true;
 
-      Freezed(addr);
+      emit Freezed(addr);
       return true;
     }
 
@@ -28,7 +27,7 @@ contract Freezeable is Ownable{
 
       _freezeList[addr] = false;
 
-      UnFreezed(addr);
+      emit UnFreezed(addr);
       return true;
     }
 

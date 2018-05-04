@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.22;
 
 import "./StandardToken.sol";
 import "./Freezeable.sol";

@@ -1,48 +1,41 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.22;
 
-import "./libs/Math.sol";
+import "./ERC20Basic.sol";
+import "./libs/SafeMath.sol";
 
-contract BasicToken {
-    using Math for uint256;
+contract BasicToken is ERC20Basic {
+  using SafeMath for uint256;
 
-    // public variables
-    string public name;
-    string public symbol;
-    uint8 public decimals = 18;
+  // public variables
+  string public name;
+  string public symbol;
+  uint8 public decimals = 18;
 
-    // internal variables
-    uint256 _totalSupply;
-    mapping(address => uint256) _balances;
+  // internal variables
+  uint256 _totalSupply;
+  mapping(address => uint256) _balances;
 
-    // events
-    event Transfer(address indexed from, address indexed to, uint256 value);
+  // events
 
-    // public functions
-    function totalSupply() public view returns (uint256) {
-      return _totalSupply;
-    }
+  // public functions
+  function totalSupply() public view returns (uint256) {
+    return _totalSupply;
+  }
 
-    function balanceOf(address addr) public view returns (uint256 balance) {
-      return _balances[addr];
-    }
+  function balanceOf(address addr) public view returns (uint256 balance) {
+    return _balances[addr];
+  }
 
-    function transfer(address to, uint256 value) public returns (bool) {
-        return _transfer(msg.sender, to, value);
-    }
+  function transfer(address to, uint256 value) public returns (bool) {
+    require(to != address(0));
+    require(value <= _balances[msg.sender]);
 
-    // internal functions
-    function _transfer(address from, address to, uint256 value) internal returns (bool) {
-      require(to != address(0));
-      require(value <= _balances[from]);
+    _balances[msg.sender] = _balances[msg.sender].sub(value);
+    _balances[to] = _balances[to].add(value);
+    emit Transfer(msg.sender, to, value);
+    return true;
+  }
 
-      uint256 total = _balances[from] + _balances[to];
-
-      _balances[from] = _balances[from].sub(value);
-      _balances[to] = _balances[to].add(value);
-      Transfer(msg.sender, to, value);
-
-      assert(_balances[from] + _balances[to] == total);
-      return true;
-    }
+  // internal functions
 
 }
