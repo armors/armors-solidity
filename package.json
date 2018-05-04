@@ -1,6 +1,6 @@
 {
   "name": "armors-solidity",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Armors-solidity is a framework to build secure smart contracts on Ethereum.",
   "scripts": {
     "test": "scripts/test.sh"
