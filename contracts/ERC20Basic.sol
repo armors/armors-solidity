@@ -6,6 +6,6 @@ contract ERC20Basic {
 
   // public functions
   function totalSupply() public view returns (uint256);
-  function balanceOf(address who) public view returns (uint256);
+  function balanceOf(address addr) public view returns (uint256);
   function transfer(address to, uint256 value) public returns (bool);
 }
