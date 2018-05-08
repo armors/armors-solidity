@@ -5,20 +5,34 @@ import "./Ownable.sol";
 
 contract MintableToken is StandardToken, Ownable {
     // public variables
+    bool public mintingFinished = false;
 
     // internal variables
 
     // events
     event Mint(address indexed to, uint256 value);
+    event MintFinished();
 
     // public functions
-    function mint(address addr, uint256 value) onlyOwner public returns (bool) {
+
+    modifier canMint() {
+      require(!mintingFinished);
+      _;
+    }
+
+    function mint(address addr, uint256 value) onlyOwner canMint public returns (bool) {
       _totalSupply = _totalSupply.add(value);
       _balances[addr] = _balances[addr].add(value);
 
       emit Mint(addr, value);
       emit Transfer(address(0), addr, value);
 
+      return true;
+    }
+
+    function finishMinting() onlyOwner canMint public returns (bool) {
+      mintingFinished = true;
+      emit MintFinished();
       return true;
     }
 

@@ -21,3 +21,5 @@ npm install armors-solidity
 
 ## License
 Code released under the [MIT License](https://github.com/armors/armors-solidity/blob/master/LICENSE).
+
+** Please mark "Powered by Armors" on  your partner and official website. **
