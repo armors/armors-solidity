@@ -1,7 +1,7 @@
 # Armors-solidity
 
 [![NPM Package](https://img.shields.io/npm/v/armors-solidity.svg)](https://www.npmjs.com/package/armors-solidity)
-[![Travis](https://img.shields.io/travis/armors/armors-solidity.svg?branch=master)](https://travis-ci.com/armors/armors-solidity)
+[![Travis](https://travis-ci.com/armors/armors-solidity.svg?branch=master)](https://travis-ci.com/armors/armors-solidity)
 
 Armors-solidity is a framework to build secure smart contracts on Ethereum.
 
