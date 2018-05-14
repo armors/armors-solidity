@@ -2,52 +2,52 @@ pragma solidity ^0.4.22;
 
 import "./Ownable.sol";
 
-contract Freezeable is Ownable{
-    // public variables
 
-    // internal variables
-    mapping(address => bool) _freezeList;
+contract Freezeable is Ownable {
+  // public variables
 
-    // events
-    event Freezed(address indexed freezedAddr);
-    event UnFreezed(address indexed unfreezedAddr);
+  // internal variables
+  mapping(address => bool) _freezeList;
 
-    // public functions
-    function freeze(address addr) onlyOwner whenNotFreezed public returns (bool) {
-      require(true != _freezeList[addr]);
+  // events
+  event Freezed(address indexed freezedAddr);
+  event UnFreezed(address indexed unfreezedAddr);
 
-      _freezeList[addr] = true;
+  // public functions
+  function freeze(address addr) onlyOwner public returns (bool) {
+    require(true != _freezeList[addr]);
 
-      emit Freezed(addr);
+    _freezeList[addr] = true;
+
+    emit Freezed(addr);
+    return true;
+  }
+
+  function unfreeze(address addr) onlyOwner public returns (bool) {
+    require(true == _freezeList[addr]);
+
+    _freezeList[addr] = false;
+
+    emit UnFreezed(addr);
+    return true;
+  }
+
+  modifier whenNotFreezed() {
+    require(true != _freezeList[msg.sender]);
+    _;
+  }
+
+  modifier whenFreezed() {
+    require(true == _freezeList[msg.sender]);
+    _;
+  }
+
+  function isFreezed(address addr) public view returns (bool) {
+    if (true == _freezeList[addr]) {
       return true;
+    } else {
+      return false;
     }
-
-    function unfreeze(address addr) onlyOwner whenFreezed public returns (bool) {
-      require(true == _freezeList[addr]);
-
-      _freezeList[addr] = false;
-
-      emit UnFreezed(addr);
-      return true;
-    }
-
-    modifier whenNotFreezed() {
-        require(true != _freezeList[msg.sender]);
-        _;
-    }
-
-    modifier whenFreezed() {
-        require(true == _freezeList[msg.sender]);
-        _;
-    }
-
-    function isFreezing(address addr) public view returns (bool) {
-        if (true == _freezeList[addr]) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // internal functions
+  }
+  // internal functions
 }

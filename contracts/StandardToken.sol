@@ -2,6 +2,7 @@ pragma solidity ^0.4.22;
 import "./BasicToken.sol";
 import "./ERC20.sol";
 
+
 contract StandardToken is ERC20, BasicToken {
   // public variables
 
@@ -49,6 +50,5 @@ contract StandardToken is ERC20, BasicToken {
     emit Approval(msg.sender, agent, _allowances[msg.sender][agent]);
     return true;
   }
-
   // internal functions
 }

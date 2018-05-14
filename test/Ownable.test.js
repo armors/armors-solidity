@@ -2,7 +2,6 @@
 import assertRevert from './helpers/assertRevert';
 
 var Ownable = artifacts.require('Ownable');
-const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 contract('Ownable', function (accounts) {
   let ownable;
@@ -35,5 +34,4 @@ contract('Ownable', function (accounts) {
     let originalOwner = await ownable.owner();
     await assertRevert(ownable.transferOwnership(null, { from: originalOwner }));
   });
-
 });

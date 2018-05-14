@@ -1,9 +1,12 @@
 {
   "name": "armors-solidity",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Armors-solidity is a framework to build secure smart contracts on Ethereum.",
   "scripts": {
-    "test": "scripts/test.sh"
+    "lint": "eslint .",
+    "lint:sol": "solium -d .",
+    "test": "scripts/test.sh",
+    "coverage": "scripts/coverage.sh"
   },
   "repository": {
     "type": "git",
@@ -30,7 +33,16 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "chai-bignumber": "^2.0.2",
+    "eslint": "^4.19.1",
+    "eslint-config-import": "^0.13.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.1.0",
     "ganache-cli": "^6.1.0",
+    "solidity-coverage": "^0.5.0",
+    "solium": "^1.1.7",
     "truffle": "^4.1.8"
   }
 }

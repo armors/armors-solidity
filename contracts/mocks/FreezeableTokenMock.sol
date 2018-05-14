@@ -1,9 +1,9 @@
 pragma solidity ^0.4.22;
 
-import "../BasicToken.sol";
+import "../FreezeableToken.sol";
 
 
-contract BasicTokenMock is BasicToken {
+contract FreezeableTokenMock is FreezeableToken {
 
   constructor(address initialAccount, uint256 initialBalance) public {
     _balances[initialAccount] = initialBalance;

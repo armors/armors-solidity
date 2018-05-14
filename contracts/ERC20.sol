@@ -2,6 +2,7 @@ pragma solidity ^0.4.22;
 
 import "./ERC20Basic.sol";
 
+
 contract ERC20 is ERC20Basic {
   // events
   event Approval(address indexed owner, address indexed agent, uint256 value);

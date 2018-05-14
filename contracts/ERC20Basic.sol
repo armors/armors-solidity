@@ -1,5 +1,6 @@
 pragma solidity ^0.4.22;
 
+
 contract ERC20Basic {
   // events
   event Transfer(address indexed from, address indexed to, uint256 value);

@@ -3,38 +3,39 @@ pragma solidity ^0.4.22;
 import "./StandardToken.sol";
 import "./Ownable.sol";
 
+
 contract MintableToken is StandardToken, Ownable {
-    // public variables
-    bool public mintingFinished = false;
+  // public variables
+  bool public mintingFinished = false;
 
-    // internal variables
+  // internal variables
 
-    // events
-    event Mint(address indexed to, uint256 value);
-    event MintFinished();
+  // events
+  event Mint(address indexed to, uint256 value);
+  event MintFinished();
 
-    // public functions
+  // public functions
 
-    modifier canMint() {
-      require(!mintingFinished);
-      _;
-    }
+  modifier canMint() {
+    require(!mintingFinished);
+    _;
+  }
 
-    function mint(address addr, uint256 value) onlyOwner canMint public returns (bool) {
-      _totalSupply = _totalSupply.add(value);
-      _balances[addr] = _balances[addr].add(value);
+  function mint(address addr, uint256 value) onlyOwner canMint public returns (bool) {
+    _totalSupply = _totalSupply.add(value);
+    _balances[addr] = _balances[addr].add(value);
 
-      emit Mint(addr, value);
-      emit Transfer(address(0), addr, value);
+    emit Mint(addr, value);
+    emit Transfer(address(0), addr, value);
 
-      return true;
-    }
+    return true;
+  }
 
-    function finishMinting() onlyOwner canMint public returns (bool) {
-      mintingFinished = true;
-      emit MintFinished();
-      return true;
-    }
+  function finishMinting() onlyOwner canMint public returns (bool) {
+    mintingFinished = true;
+    emit MintFinished();
+    return true;
+  }
 
-    // internal functions
+  // internal functions
 }
