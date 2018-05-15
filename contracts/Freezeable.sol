@@ -37,11 +37,6 @@ contract Freezeable is Ownable {
     _;
   }
 
-  modifier whenFreezed() {
-    require(true == _freezeList[msg.sender]);
-    _;
-  }
-
   function isFreezed(address addr) public view returns (bool) {
     if (true == _freezeList[addr]) {
       return true;
