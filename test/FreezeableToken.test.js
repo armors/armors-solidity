@@ -134,10 +134,18 @@ contract('FreezeableToken', function ([_, owner, recipient, anotherAccount, appr
         assert.equal(recipientBalance, 100);
       });
 
-      it('reverts when trying to transfer when freezed', async function () {
-        await this.token.freeze(recipient, { from: owner });
+      describe('when trying to transfer when freezed', function () {
+        beforeEach(async function () {
+          await this.token.freeze(recipient, { from: owner });
+        });
 
-        await assertRevert(this.token.transfer(anotherAccount, 100, { from: recipient }));
+        it('revert when is sender', async function () {
+          await assertRevert(this.token.transfer(anotherAccount, 100, { from: recipient }));
+        });
+
+        it('revert when is receiver', async function () {
+          await assertRevert(this.token.transfer(recipient, 0, { from: owner }));
+        });
       });
     });
 
@@ -159,10 +167,18 @@ contract('FreezeableToken', function ([_, owner, recipient, anotherAccount, appr
         assert.equal(allowance, 40);
       });
 
-      it('reverts when trying to transfer when freezed', async function () {
-        await this.token.freeze(recipient, { from: owner });
+      describe('when trying to approve when freezed', function () {
+        beforeEach(async function () {
+          await this.token.freeze(recipient, { from: owner });
+        });
 
-        await assertRevert(this.token.approve(approveAccount, 40, { from: recipient }));
+        it('revert when is owner', async function () {
+          await assertRevert(this.token.approve(approveAccount, 100, { from: recipient }));
+        });
+
+        it('revert when is agent', async function () {
+          await assertRevert(this.token.approve(recipient, 0, { from: owner }));
+        });
       });
     });
 
@@ -194,10 +210,18 @@ contract('FreezeableToken', function ([_, owner, recipient, anotherAccount, appr
         assert.equal(recipientBalance, 40);
       });
 
-      it('reverts when trying to transfer from when freezed', async function () {
-        await this.token.freeze(recipient, { from: owner });
+      describe('when trying to transfer from when freezed', function () {
+        beforeEach(async function () {
+          await this.token.freeze(recipient, { from: owner });
+        });
 
-        await assertRevert(this.token.transferFrom(recipient, anotherAccount, 40, { from: approveAccount }));
+        it('revert when is sender', async function () {
+          await assertRevert(this.token.transferFrom(recipient, anotherAccount, 40, { from: approveAccount }));
+        });
+
+        it('revert when is receiver', async function () {
+          await assertRevert(this.token.transferFrom(recipient, recipient, 0, { from: approveAccount }));
+        });
       });
     });
 
@@ -223,10 +247,18 @@ contract('FreezeableToken', function ([_, owner, recipient, anotherAccount, appr
         assert.equal(allowance, 60);
       });
 
-      it('reverts when trying to transfer when freezed', async function () {
-        await this.token.freeze(recipient, { from: owner });
+      describe('when trying to decrease approval when freezed', function () {
+        beforeEach(async function () {
+          await this.token.freeze(recipient, { from: owner });
+        });
 
-        await assertRevert(this.token.decreaseApproval(approveAccount, 40, { from: recipient }));
+        it('revert when is owner', async function () {
+          await assertRevert(this.token.decreaseApproval(approveAccount, 40, { from: recipient }));
+        });
+
+        it('revert when is agent', async function () {
+          await assertRevert(this.token.decreaseApproval(recipient, 0, { from: owner }));
+        });
       });
     });
 
@@ -252,10 +284,18 @@ contract('FreezeableToken', function ([_, owner, recipient, anotherAccount, appr
         assert.equal(allowance, 140);
       });
 
-      it('reverts when trying to increase approval when freezed', async function () {
-        await this.token.freeze(recipient, { from: owner });
+      describe('when trying to increase approval when freezed', function () {
+        beforeEach(async function () {
+          await this.token.freeze(recipient, { from: owner });
+        });
 
-        await assertRevert(this.token.increaseApproval(approveAccount, 40, { from: recipient }));
+        it('revert when is owner', async function () {
+          await assertRevert(this.token.increaseApproval(approveAccount, 40, { from: recipient }));
+        });
+
+        it('revert when is agent', async function () {
+          await assertRevert(this.token.increaseApproval(recipient, 0, { from: owner }));
+        });
       });
     });
   });
