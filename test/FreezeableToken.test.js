@@ -197,7 +197,7 @@ contract('FreezeableToken', function ([_, owner, recipient, anotherAccount, appr
         assert.equal(recipientBalance, 40);
       });
 
-      it('allows to transfer when freezed and then unfreezed', async function () {
+      it('allows to transfer when freezed the sender and then unfreezed', async function () {
         await this.token.freeze(recipient, { from: owner });
         await this.token.unfreeze(recipient, { from: owner });
 
@@ -210,17 +210,36 @@ contract('FreezeableToken', function ([_, owner, recipient, anotherAccount, appr
         assert.equal(recipientBalance, 40);
       });
 
-      describe('when trying to transfer from when freezed', function () {
+      it('allows to transfer when freezed the receiver and then unfreezed', async function () {
+        await this.token.freeze(anotherAccount, { from: owner });
+        await this.token.unfreeze(anotherAccount, { from: owner });
+
+        await this.token.transferFrom(recipient, anotherAccount, 40, { from: approveAccount });
+
+        const senderBalance = await this.token.balanceOf(recipient);
+        assert.equal(senderBalance, 60);
+
+        const recipientBalance = await this.token.balanceOf(anotherAccount);
+        assert.equal(recipientBalance, 40);
+      });
+
+      describe('when trying to transfer from when freezed the sender', function () {
         beforeEach(async function () {
           await this.token.freeze(recipient, { from: owner });
         });
 
-        it('revert when is sender', async function () {
+        it('revert', async function () {
           await assertRevert(this.token.transferFrom(recipient, anotherAccount, 40, { from: approveAccount }));
         });
+      });
 
-        it('revert when is receiver', async function () {
-          await assertRevert(this.token.transferFrom(recipient, recipient, 0, { from: approveAccount }));
+      describe('when trying to transfer from when freezed the receiver', function () {
+        beforeEach(async function () {
+          await this.token.freeze(anotherAccount, { from: owner });
+        });
+
+        it('revert', async function () {
+          await assertRevert(this.token.transferFrom(recipient, anotherAccount, 40, { from: approveAccount }));
         });
       });
     });
