@@ -16,7 +16,7 @@ contract DemoToken is StandardToken {
   // public functions
   constructor() public {
     //init _totalSupply
-    uint256 _totalSupply = 10000 * (10 ** uint256(decimals));
+    _totalSupply = 10000 * (10 ** uint256(decimals));
 
     _balances[msg.sender] = _totalSupply;
     emit Transfer(0x0, msg.sender, _totalSupply);
