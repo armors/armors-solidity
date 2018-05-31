@@ -1,6 +1,6 @@
 pragma solidity ^0.4.23;
 
-import "./StandardToken.sol";
+import "../StandardToken.sol";
 
 
 contract DemoToken is StandardToken {
@@ -9,19 +9,11 @@ contract DemoToken is StandardToken {
   string public symbol = "DEMO";
   uint8 public decimals = 18;
 
-  // internal variables
-
-  // events
-
   // public functions
   constructor() public {
-    //init _totalSupply
     _totalSupply = 10000 * (10 ** uint256(decimals));
 
     _balances[msg.sender] = _totalSupply;
     emit Transfer(0x0, msg.sender, _totalSupply);
   }
-
-
-  // internal functions
 }
