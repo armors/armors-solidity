@@ -14,7 +14,7 @@ contract Freezeable is Ownable {
   event UnFreezed(address indexed unfreezedAddr);
 
   // public functions
-  function freeze(address addr) onlyOwner public returns (bool) {
+  function freeze(address addr) public onlyOwner returns (bool) {
     require(true != _freezeList[addr]);
 
     _freezeList[addr] = true;
@@ -23,7 +23,7 @@ contract Freezeable is Ownable {
     return true;
   }
 
-  function unfreeze(address addr) onlyOwner public returns (bool) {
+  function unfreeze(address addr) public onlyOwner returns (bool) {
     require(true == _freezeList[addr]);
 
     _freezeList[addr] = false;
