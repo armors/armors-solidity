@@ -4,6 +4,7 @@
   "rules": {
     "quotes": ["error", "double"],
     "no-empty-blocks": "off",
+    "error-reason": ["warning", { "revert": true, "require": false }],
     "indentation": ["error", 2],
     "arg-overflow": ["warning", 3],
     "no-constant": ["error"],
