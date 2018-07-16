@@ -4,6 +4,8 @@
   "rules": {
     "quotes": ["error", "double"],
     "no-empty-blocks": "off",
+    "error-reason" : "off",
+    "visibility-first" : "off",
     "indentation": ["error", 2],
     "arg-overflow": ["warning", 3],
     "no-constant": ["error"],
