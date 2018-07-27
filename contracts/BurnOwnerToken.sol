@@ -4,7 +4,7 @@ import "./StandardToken.sol";
 import "./Ownable.sol";
 
 
-contract BrunOwnerToken is StandardToken, Ownable {
+contract BurnOwnerToken is StandardToken, Ownable {
 
   // events
   event Burn(address indexed burner, uint256 value);

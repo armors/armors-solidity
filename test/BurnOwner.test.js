@@ -9,13 +9,13 @@ require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-const BrunOwnerToken = artifacts.require('BurnOwnerTokenMock');
+const BurnOwnerToken = artifacts.require('BurnOwnerTokenMock');
 
-contract('BrunOwnerToken', function ([owner, anotherAccount]) {
+contract('BurnOwnerToken', function ([owner, anotherAccount]) {
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
   beforeEach(async function () {
-    this.token = await BrunOwnerToken.new(owner, 1000);
+    this.token = await BurnOwnerToken.new(owner, 1000);
   });
 
   describe('as a basic burnable token', function () {
