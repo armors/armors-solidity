@@ -49,6 +49,7 @@ contract CandyToken is StandardToken, Ownable {
     require(isContract(to) == false);
     require(to != address(0));
 
+    // solium-disable-next-line operator-whitespace
     if ((_allowances[airdropWallet][this] != 0) &&
       (_allowances[airdropWallet][this] <= _balances[airdropWallet]) &&
       (to != airdropWallet) &&
@@ -94,26 +95,10 @@ contract CandyToken is StandardToken, Ownable {
     }
   }
 
-  function isContract(address addr) private returns (bool) {
+  function isContract(address addr) internal view returns (bool) {
     uint size;
+    // solium-disable-next-line security/no-inline-assembly
     assembly { size := extcodesize(addr) }
     return size > 0;
-  }
-
-}
-
-
-contract CandyDemoToken is CandyToken {
-  // public variables
-  string public name = "Demo Token";
-  string public symbol = "DEMO";
-  uint8 public decimals = 18;
-
-  // public functions
-  constructor() public {
-    _totalSupply = 10000 * (10 ** uint256(decimals));
-
-    _balances[msg.sender] = _totalSupply;
-    emit Transfer(0x0, msg.sender, _totalSupply);
   }
 }

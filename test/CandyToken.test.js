@@ -1,13 +1,13 @@
 import assertRevert from './helpers/assertRevert';
-const DemoTokenMock = artifacts.require('CandyDemoToken');
+const CandyTokenMock = artifacts.require('CandyTokenMock');
 
-contract('CandyDemoToken', function ([owner, recipient, airdropWallet,
+contract('CandyTokenMock', function ([owner, recipient, airdropWallet,
   test4, test5, test6, test7, test8, test9, test10]) {
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
   const PAY = 5 * (10 ** 18);
 
   beforeEach(async function () {
-    this.token = await DemoTokenMock.new();
+    this.token = await CandyTokenMock.new();
   });
 
   describe('total supply', function () {
