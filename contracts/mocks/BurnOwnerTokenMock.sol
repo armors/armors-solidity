@@ -1,9 +1,9 @@
 pragma solidity ^0.4.23;
 
-import "../BrunOwnerToken.sol";
+import "../BurnOwnerToken.sol";
 
 
-contract BurnOwnerTokenMock is BrunOwnerToken {
+contract BurnOwnerTokenMock is BurnOwnerToken {
 
   constructor(address initialAccount, uint256 initialBalance) public {
     _balances[initialAccount] = initialBalance;
