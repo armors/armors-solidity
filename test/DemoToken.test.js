@@ -167,21 +167,8 @@ contract('DemoToken', function ([_, owner, recipient, anotherAccount]) {
       const amount = 100;
       const agent = ZERO_ADDRESS;
 
-      it('approves the requested amount', async function () {
-        await this.token.approve(agent, amount, { from: owner });
-
-        const allowance = await this.token.allowance(owner, agent);
-        assert.equal(allowance, amount);
-      });
-
-      it('emits an approval event', async function () {
-        const { logs } = await this.token.approve(agent, amount, { from: owner });
-
-        assert.equal(logs.length, 1);
-        assert.equal(logs[0].event, 'Approval');
-        assert.equal(logs[0].args.owner, owner);
-        assert.equal(logs[0].args.agent, agent);
-        assert(logs[0].args.value.eq(amount));
+      it('reverts', async function () {
+        await assertRevert(this.token.approve(agent, amount, { from: owner }));
       });
     });
   });
@@ -355,21 +342,8 @@ contract('DemoToken', function ([_, owner, recipient, anotherAccount]) {
       const amount = 100;
       const agent = ZERO_ADDRESS;
 
-      it('decreases the requested amount', async function () {
-        await this.token.decreaseApproval(agent, amount, { from: owner });
-
-        const allowance = await this.token.allowance(owner, agent);
-        assert.equal(allowance, 0);
-      });
-
-      it('emits an approval event', async function () {
-        const { logs } = await this.token.decreaseApproval(agent, amount, { from: owner });
-
-        assert.equal(logs.length, 1);
-        assert.equal(logs[0].event, 'Approval');
-        assert.equal(logs[0].args.owner, owner);
-        assert.equal(logs[0].args.agent, agent);
-        assert(logs[0].args.value.eq(0));
+      it('reverts', async function () {
+        await assertRevert(this.token.decreaseApproval(agent, amount, { from: owner }));
       });
     });
   });
@@ -454,21 +428,8 @@ contract('DemoToken', function ([_, owner, recipient, anotherAccount]) {
     describe('when the agent is the zero address', function () {
       const agent = ZERO_ADDRESS;
 
-      it('approves the requested amount', async function () {
-        await this.token.increaseApproval(agent, amount, { from: owner });
-
-        const allowance = await this.token.allowance(owner, agent);
-        assert.equal(allowance, amount);
-      });
-
-      it('emits an approval event', async function () {
-        const { logs } = await this.token.increaseApproval(agent, amount, { from: owner });
-
-        assert.equal(logs.length, 1);
-        assert.equal(logs[0].event, 'Approval');
-        assert.equal(logs[0].args.owner, owner);
-        assert.equal(logs[0].args.agent, agent);
-        assert(logs[0].args.value.eq(amount));
+      it('reverts', async function () {
+        await assertRevert(this.token.increaseApproval(agent, amount, { from: owner }));
       });
     });
   });
