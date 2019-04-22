@@ -25,6 +25,8 @@ contract StandardToken is ERC20, BasicToken {
   }
 
   function approve(address agent, uint256 value) public returns (bool) {
+    require(agent != address(0));
+
     _allowances[msg.sender][agent] = value;
     emit Approval(msg.sender, agent, value);
     return true;
@@ -35,12 +37,16 @@ contract StandardToken is ERC20, BasicToken {
   }
 
   function increaseApproval(address agent, uint value) public returns (bool) {
+    require(agent != address(0));
+    
     _allowances[msg.sender][agent] = _allowances[msg.sender][agent].add(value);
     emit Approval(msg.sender, agent, _allowances[msg.sender][agent]);
     return true;
   }
 
   function decreaseApproval(address agent, uint value) public returns (bool) {
+    require(agent != address(0));
+    
     uint allowanceValue = _allowances[msg.sender][agent];
     if (value > allowanceValue) {
       _allowances[msg.sender][agent] = 0;
