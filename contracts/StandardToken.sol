@@ -5,7 +5,10 @@ import "./ERC20.sol";
 
 contract StandardToken is ERC20, BasicToken {
 
+
+
   mapping (address => mapping (address => uint256)) _allowances;
+
 
   function transferFrom(address from, address to, uint256 value) public returns (bool) {
     require(to != address(0));
@@ -51,4 +54,5 @@ contract StandardToken is ERC20, BasicToken {
     emit Approval(msg.sender, agent, _allowances[msg.sender][agent]);
     return true;
   }
+
 }
