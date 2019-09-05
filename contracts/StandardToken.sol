@@ -4,14 +4,9 @@ import "./ERC20.sol";
 
 
 contract StandardToken is ERC20, BasicToken {
-  // public variables
 
-  // internal variables
   mapping (address => mapping (address => uint256)) _allowances;
 
-  // events
-
-  // public functions
   function transferFrom(address from, address to, uint256 value) public returns (bool) {
     require(to != address(0));
     require(value <= _balances[from]);
@@ -38,7 +33,7 @@ contract StandardToken is ERC20, BasicToken {
 
   function increaseApproval(address agent, uint value) public returns (bool) {
     require(agent != address(0));
-    
+
     _allowances[msg.sender][agent] = _allowances[msg.sender][agent].add(value);
     emit Approval(msg.sender, agent, _allowances[msg.sender][agent]);
     return true;
@@ -46,7 +41,7 @@ contract StandardToken is ERC20, BasicToken {
 
   function decreaseApproval(address agent, uint value) public returns (bool) {
     require(agent != address(0));
-    
+
     uint allowanceValue = _allowances[msg.sender][agent];
     if (value > allowanceValue) {
       _allowances[msg.sender][agent] = 0;
@@ -56,5 +51,4 @@ contract StandardToken is ERC20, BasicToken {
     emit Approval(msg.sender, agent, _allowances[msg.sender][agent]);
     return true;
   }
-  // internal functions
 }
